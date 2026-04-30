@@ -8,7 +8,8 @@ const Loader = () => {
   const messages = [
     "These may take a while",
     "You can still access my portfolio instead of waiting",
-    "Get to know me!"
+    "Get to know me!",
+    "Long press each icons to view more info."
   ];
 
   useEffect(() => {

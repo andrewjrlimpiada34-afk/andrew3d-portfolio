@@ -24,14 +24,14 @@ const HamburgerMenu = ({ isOpen, onClose }) => (
     {isOpen && (
       <>
         <motion.div
-          className="fixed inset-0 bg-black/40 z-40"
+          className="fixed inset-0 bg-black/40 z-[40] pointer-events-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
         />
         <motion.aside
-          className="fixed top-0 right-0 w-3/4 max-w-xs h-full bg-white shadow-lg z-50 flex flex-col p-8 gap-8"
+          className="fixed top-0 right-0 w-3/4 max-w-xs h-full bg-white shadow-lg z-[50] flex flex-col p-8 gap-8 pointer-events-auto"
           initial="hidden"
           animate="visible"
           exit="exit"

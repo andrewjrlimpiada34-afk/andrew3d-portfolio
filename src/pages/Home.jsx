@@ -80,13 +80,13 @@ const Home = () => {
   };
 
   return (
-    <section className="w-full h-screen relative">
+    <section className="w-full h-screen relative z-0">
       <SEO
         title="Andrew B. Limpiada Jr. | Aspiring Computer Engineer"
         description="Portfolio of Andrew B. Limpiada Jr., an aspiring Computer Engineer from Marinduque State College who is passionate about technology, creativity, and continuous learning."
         type="website"
       />
-      <div className="absolute top-24 right-4 z-20 sm:right-8">
+      <div className="absolute top-24 right-4 z-10 sm:right-8">
         <button
           type="button"
           onClick={() => setIsAnimated((prev) => !prev)}
@@ -95,17 +95,12 @@ const Home = () => {
           {isAnimated ? "Pause Scene" : "Play Scene"}
         </button>
       </div>
-      <div className="absolute bottom-20 left-1/2 z-20 -translate-x-1/2 px-4 sm:top-24 sm:bottom-auto">
-        <p className="rounded-full bg-white/80 backdrop-blur px-4 py-2 text-center text-xs sm:text-sm font-medium text-slate-700 shadow-md">
-          Long press each icons to view more info.
-        </p>
-      </div>
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
         {currentStage && <HomeInfo currentStage={currentStage} />}
       </div>
 
       <Canvas
-        className={`w-full h-screen bg-transparent ${
+        className={`w-full h-screen bg-transparent z-0 ${
           isRotating ? "cursor-grabbing" : "cursor-grab"
         }`}
         dpr={[1, 1.25]}
