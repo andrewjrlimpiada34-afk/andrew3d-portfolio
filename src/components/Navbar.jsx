@@ -8,8 +8,12 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className="header flex items-center justify-between">
-      <NavLink to="/">
-        <img src={logo} alt="logo" className="w-18 h-18 object-contain" />
+      <NavLink to="/" className="flex items-center shrink-0">
+        <img
+          src={logo}
+          alt="Andrew Jr logo"
+          className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
+        />
       </NavLink>
       {/* Desktop nav */}
       <nav className="hidden sm:flex text-lg gap-7 font-medium">
