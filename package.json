@@ -8,6 +8,7 @@
     "build": "vite build && npm run generate-sitemap",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
+    "start": "node server.js",
     "generate-sitemap": "node scripts/sitemap-generator.js",
     "clean": "node -e \"const fs=require('fs'); fs.rmSync('dist', { recursive: true, force: true });\"",
     "prebuild": "npm run clean"
@@ -17,6 +18,7 @@
     "@react-spring/three": "^9.7.3",
     "@react-three/drei": "^9.88.2",
     "@react-three/fiber": "^8.14.5",
+    "express": "^4.21.2",
     "framer-motion": "^12.18.1",
     "react": "^18.2.0",
     "react-confetti": "^6.4.0",
