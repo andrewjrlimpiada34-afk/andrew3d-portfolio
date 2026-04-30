@@ -34,13 +34,13 @@ const Home = () => {
 
     if (window.innerWidth < 640) {
       screenScale = [0.58, 0.58, 0.58];
-      screenPosition = [0, -3.1, 0.3];
+      screenPosition = [0, -2.55, 0.25];
     } else if (window.innerWidth < 1024) {
       screenScale = [0.7, 0.7, 0.7];
-      screenPosition = [0, -3.35, -0.1];
+      screenPosition = [0, -2.85, -0.1];
     } else {
       screenScale = [0.82, 0.82, 0.82];
-      screenPosition = [0, -3.65, -0.5];
+      screenPosition = [0, -3.1, -0.45];
     }
 
     return [screenScale, screenPosition];
@@ -51,13 +51,13 @@ const Home = () => {
     let screenPosition;
 
     if (window.innerWidth < 640) {
-      screenScale = [2.95, 2.95, 2.95];
+      screenScale = [3.15, 3.15, 3.15];
       screenPosition = [0, -1.95, -7.3];
     } else if (window.innerWidth < 1024) {
-      screenScale = [3.35, 3.35, 3.35];
+      screenScale = [3.55, 3.55, 3.55];
       screenPosition = [0, -2.2, -8];
     } else {
-      screenScale = [3.7, 3.7, 3.7];
+      screenScale = [3.9, 3.9, 3.9];
       screenPosition = [0, -2.45, -8.7];
     }
 
@@ -94,6 +94,11 @@ const Home = () => {
         >
           {isAnimated ? "Pause Scene" : "Play Scene"}
         </button>
+      </div>
+      <div className="absolute top-24 left-1/2 z-20 -translate-x-1/2 px-4">
+        <p className="rounded-full bg-white/80 backdrop-blur px-4 py-2 text-center text-xs sm:text-sm font-medium text-slate-700 shadow-md">
+          Long press each icons to view more info.
+        </p>
       </div>
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
         {currentStage && <HomeInfo currentStage={currentStage} />}
