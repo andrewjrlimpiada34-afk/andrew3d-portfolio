@@ -1,7 +1,23 @@
 import { Html, useProgress } from "@react-three/drei";
+import { useState, useEffect } from "react";
 
 const Loader = () => {
   const { progress } = useProgress();
+  const [messageIndex, setMessageIndex] = useState(0);
+
+  const messages = [
+    "These may take a while",
+    "You can still access my portfolio instead of waiting",
+    "Get to know me!"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMessageIndex((prev) => (prev + 1) % messages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Html center>
@@ -10,7 +26,10 @@ const Loader = () => {
         <p className="mt-3 text-sm font-semibold text-slate-800">
           Loading...
         </p>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-slate-500 mt-2 text-center min-h-[20px] transition-opacity duration-500">
+          {messages[messageIndex]}
+        </p>
+        <p className="text-xs text-slate-400 mt-1">
           {Math.round(progress)}%
         </p>
       </div>

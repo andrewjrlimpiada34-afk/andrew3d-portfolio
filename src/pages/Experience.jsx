@@ -4,7 +4,7 @@ import { experiences } from "../constants";
 
 const Experience = () => {
   return (
-    <section className="max-container">
+    <section className="max-w-5xl mx-auto sm:p-16 pb-12 px-8 pt-[126px] min-h-[calc(100vh-80px)]">
       <Helmet>
         <title>Experience | Andrew B. Limpiada Jr.</title>
         <meta
@@ -17,7 +17,6 @@ const Experience = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="padding-t"
       >
         <h1 className="head-text">
           My <span className="text-gradient">Experience</span>

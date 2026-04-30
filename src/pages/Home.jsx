@@ -95,7 +95,7 @@ const Home = () => {
           {isAnimated ? "Pause Scene" : "Play Scene"}
         </button>
       </div>
-      <div className="absolute top-24 left-1/2 z-20 -translate-x-1/2 px-4">
+      <div className="absolute bottom-20 left-1/2 z-20 -translate-x-1/2 px-4 sm:top-24 sm:bottom-auto">
         <p className="rounded-full bg-white/80 backdrop-blur px-4 py-2 text-center text-xs sm:text-sm font-medium text-slate-700 shadow-md">
           Long press each icons to view more info.
         </p>
