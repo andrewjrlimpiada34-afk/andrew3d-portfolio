@@ -60,7 +60,7 @@ export const projects = [
     description:
       "A webapp for online ordering of Severino perfume products.",
     image: portfolioPreview,
-    liveUrl: "https://severino-online-shop.vercel.app",
+    liveUrl: "https://severino-webapp-shop.vercel.app",
     sourceCode: "https://github.com/andrewjrlimpiada34-afk",
   },
 ];
