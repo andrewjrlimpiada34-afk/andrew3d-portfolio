@@ -4,7 +4,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { soundoff, soundon } from "../assets/icons";
 import sakura from "../assets/sakura.mp3";
 import { HomeInfo, Loader, SEO } from "../components";
-import { Bird, Island, Plane, Sky } from "../models";
+import { Bird, Hello, Island, Plane, Sky } from "../models";
 
 const Home = () => {
   const audioRef = useRef(new Audio(sakura));
@@ -25,16 +25,19 @@ const Home = () => {
     };
   }, [isPlayingMusic]);
 
-  const adjustBiplaneForScreenSize = () => {
+  const adjustMorionForScreenSize = () => {
     let screenScale;
     let screenPosition;
 
-    if (window.innerWidth < 768) {
-      screenScale = [1.5, 1.5, 1.5];
-      screenPosition = [0, -1.5, 0];
+    if (window.innerWidth < 640) {
+      screenScale = [0.75, 0.75, 0.75];
+      screenPosition = [1.6, -1.9, 0.6];
+    } else if (window.innerWidth < 1024) {
+      screenScale = [0.9, 0.9, 0.9];
+      screenPosition = [2.1, -2.1, 0.2];
     } else {
-      screenScale = [3, 3, 3];
-      screenPosition = [0, -4, -4];
+      screenScale = [1.05, 1.05, 1.05];
+      screenPosition = [2.5, -2.35, -0.2];
     }
 
     return [screenScale, screenPosition];
@@ -45,21 +48,40 @@ const Home = () => {
     let screenPosition;
 
     if (window.innerWidth < 640) {
-      screenScale = [1.9, 1.9, 1.9];
-      screenPosition = [0, -2.1, -7];
+      screenScale = [2.4, 2.4, 2.4];
+      screenPosition = [0, -2.25, -7.4];
     } else if (window.innerWidth < 1024) {
-      screenScale = [2.2, 2.2, 2.2];
-      screenPosition = [0, -2.4, -7.8];
+      screenScale = [2.8, 2.8, 2.8];
+      screenPosition = [0, -2.55, -8.1];
     } else {
-      screenScale = [2.5, 2.5, 2.5];
-      screenPosition = [0, -2.7, -8.5];
+      screenScale = [3.1, 3.1, 3.1];
+      screenPosition = [0, -2.8, -8.8];
     }
 
     return [screenScale, screenPosition];
   };
 
-  const [biplaneScale, biplanePosition] = adjustBiplaneForScreenSize();
+  const adjustHelloForScreenSize = () => {
+    let screenScale;
+    let screenPosition;
+
+    if (window.innerWidth < 640) {
+      screenScale = [0.9, 0.9, 0.9];
+      screenPosition = [0, 1.15, -6.8];
+    } else if (window.innerWidth < 1024) {
+      screenScale = [1.05, 1.05, 1.05];
+      screenPosition = [0, 1.3, -7.5];
+    } else {
+      screenScale = [1.2, 1.2, 1.2];
+      screenPosition = [0, 1.45, -8.1];
+    }
+
+    return [screenScale, screenPosition];
+  };
+
+  const [morionScale, morionPosition] = adjustMorionForScreenSize();
   const [islandScale, islandPosition] = adjustIslandForScreenSize();
+  const [helloScale, helloPosition] = adjustHelloForScreenSize();
 
   return (
     <section className="w-full h-screen relative">
@@ -76,9 +98,9 @@ const Home = () => {
         className={`w-full h-screen bg-transparent ${
           isRotating ? "cursor-grabbing" : "cursor-grab"
         }`}
-        dpr={[1, 1.5]}
+        dpr={[1, 1.25]}
         gl={{ antialias: false, powerPreference: "high-performance" }}
-        camera={{ near: 0.1, far: 1000 }}
+        camera={{ near: 0.1, far: 1000, position: [0, 0, 10], fov: 45 }}
       >
         <Suspense fallback={<Loader />}>
           <directionalLight position={[1, 1, 1]} intensity={2} />
@@ -106,11 +128,16 @@ const Home = () => {
             rotation={[0.1, 4.7077, 0]}
             scale={islandScale}
           />
+          <Hello
+            position={helloPosition}
+            rotation={[0.05, 0, 0]}
+            scale={helloScale}
+          />
           <Plane
             isRotating={isRotating}
-            position={biplanePosition}
-            rotation={[0, 20.1, 0]}
-            scale={biplaneScale}
+            position={morionPosition}
+            rotation={[0, 5.2, 0]}
+            scale={morionScale}
           />
         </Suspense>
       </Canvas>

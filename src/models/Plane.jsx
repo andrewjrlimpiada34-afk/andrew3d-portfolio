@@ -1,31 +1,43 @@
 import { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
-import planeScene from "../assets/3d/plane.glb";
+import morionScene from "../assets/3d/morion.glb";
 
-// 3D Model from: https://sketchfab.com/3d-models/stylized-ww1-plane-c4edeb0e410f46e8a4db320879f0a1db
 export function Plane({ isRotating, ...props }) {
   const ref = useRef();
-  // Load the 3D model and its animations
-  const { scene, animations } = useGLTF(planeScene);
-  // Get animation actions associated with the plane
+  const { scene, animations } = useGLTF(morionScene);
   const { actions } = useAnimations(animations, ref);
 
-  // Use an effect to control the plane's animation based on 'isRotating'
-  // Note: Animation names can be found on the Sketchfab website where the 3D model is hosted.
   useEffect(() => {
+    const animationList = Object.values(actions).filter(Boolean);
+
     if (isRotating) {
-      actions["Take 001"].play();
+      animationList.forEach((action) => action.play());
     } else {
-      actions["Take 001"].stop();
+      animationList.forEach((action) => action.stop());
     }
   }, [actions, isRotating]);
 
+  useFrame(({ clock }, delta) => {
+    if (!ref.current) {
+      return;
+    }
+
+    if (isRotating) {
+      ref.current.rotation.y += delta * 0.7;
+      ref.current.position.y += Math.sin(clock.elapsedTime * 2.2) * delta * 0.12;
+      ref.current.rotation.z = Math.sin(clock.elapsedTime * 1.8) * 0.05;
+    } else {
+      ref.current.rotation.z *= 0.92;
+    }
+  });
+
   return (
     <mesh {...props} ref={ref}>
-      // use the primitive element when you want to directly embed a complex 3D
-      model or scene
       <primitive object={scene} />
     </mesh>
   );
 }
+
+useGLTF.preload(morionScene);
