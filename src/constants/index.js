@@ -56,10 +56,11 @@ export const socialLinks = [
 
 export const projects = [
   {
-    name: "3D Portfolio Website",
+    name: "Severino Online Shop WebApp",
     description:
-      "An interactive personal portfolio built with React and Three.js to introduce who I am, share my background, and present my learning journey in Computer Engineering.",
+      "A webapp for online ordering of Severino perfume products.",
     image: portfolioPreview,
+    liveUrl: "https://severino-online-shop.vercel.app",
     sourceCode: "https://github.com/andrewjrlimpiada34-afk",
   },
 ];
