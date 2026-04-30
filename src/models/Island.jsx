@@ -13,40 +13,43 @@ export function Island({
   ...props
 }) {
   const islandRef = useRef();
-  const { gl, viewport } = useThree();
-  const { scene } = useGLTF(marinduqueScene);
-
+  const pointerStart = useRef({ x: 0, y: 0 });
   const lastX = useRef(0);
   const rotationSpeed = useRef(0);
   const dampingFactor = 0.95;
+  const { viewport } = useThree();
+  const { scene } = useGLTF(marinduqueScene);
 
   const handlePointerDown = (event) => {
     event.stopPropagation();
-    event.preventDefault();
     setIsRotating(true);
-    const clientX = event.touches ? event.touches[0].clientX : event.clientX;
-    lastX.current = clientX;
+    lastX.current = event.clientX;
+    pointerStart.current = { x: event.clientX, y: event.clientY };
   };
 
   const handlePointerUp = (event) => {
     event.stopPropagation();
-    event.preventDefault();
     setIsRotating(false);
+
+    const movedX = Math.abs(event.clientX - pointerStart.current.x);
+    const movedY = Math.abs(event.clientY - pointerStart.current.y);
+
+    if (movedX < 8 && movedY < 8) {
+      onClick?.();
+    }
   };
 
   const handlePointerMove = (event) => {
     event.stopPropagation();
-    event.preventDefault();
 
     if (!isRotating || !islandRef.current) {
       return;
     }
 
-    const clientX = event.touches ? event.touches[0].clientX : event.clientX;
-    const delta = (clientX - lastX.current) / viewport.width;
+    const delta = (event.clientX - lastX.current) / viewport.width;
 
     islandRef.current.rotation.y += delta * 0.01 * Math.PI;
-    lastX.current = clientX;
+    lastX.current = event.clientX;
     rotationSpeed.current = delta * 0.01 * Math.PI;
   };
 
@@ -73,27 +76,14 @@ export function Island({
   };
 
   useEffect(() => {
-    const canvas = gl.domElement;
-    canvas.addEventListener("pointerdown", handlePointerDown);
-    canvas.addEventListener("pointerup", handlePointerUp);
-    canvas.addEventListener("pointermove", handlePointerMove);
-    canvas.addEventListener("touchstart", handlePointerDown, { passive: false });
-    canvas.addEventListener("touchend", handlePointerUp, { passive: false });
-    canvas.addEventListener("touchmove", handlePointerMove, { passive: false });
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
 
     return () => {
-      canvas.removeEventListener("pointerdown", handlePointerDown);
-      canvas.removeEventListener("pointerup", handlePointerUp);
-      canvas.removeEventListener("pointermove", handlePointerMove);
-      canvas.removeEventListener("touchstart", handlePointerDown);
-      canvas.removeEventListener("touchend", handlePointerUp);
-      canvas.removeEventListener("touchmove", handlePointerMove);
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [gl, isRotating, viewport.width]);
+  }, [isRotating]);
 
   useFrame(() => {
     if (!islandRef.current) {
@@ -134,7 +124,15 @@ export function Island({
   });
 
   return (
-    <a.group ref={islandRef} {...props} onClick={onClick}>
+    <a.group
+      ref={islandRef}
+      {...props}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={() => setIsRotating(false)}
+      onPointerMissed={() => setIsRotating(false)}
+    >
       <primitive object={scene} />
     </a.group>
   );

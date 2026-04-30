@@ -34,13 +34,13 @@ const Home = () => {
 
     if (window.innerWidth < 640) {
       screenScale = [0.58, 0.58, 0.58];
-      screenPosition = [0, -3.55, 0.3];
+      screenPosition = [0, -3.1, 0.3];
     } else if (window.innerWidth < 1024) {
       screenScale = [0.7, 0.7, 0.7];
-      screenPosition = [0, -3.9, -0.1];
+      screenPosition = [0, -3.35, -0.1];
     } else {
       screenScale = [0.82, 0.82, 0.82];
-      screenPosition = [0, -4.2, -0.5];
+      screenPosition = [0, -3.65, -0.5];
     }
 
     return [screenScale, screenPosition];
@@ -51,13 +51,13 @@ const Home = () => {
     let screenPosition;
 
     if (window.innerWidth < 640) {
-      screenScale = [2.7, 2.7, 2.7];
+      screenScale = [2.95, 2.95, 2.95];
       screenPosition = [0, -1.95, -7.3];
     } else if (window.innerWidth < 1024) {
-      screenScale = [3.1, 3.1, 3.1];
+      screenScale = [3.35, 3.35, 3.35];
       screenPosition = [0, -2.2, -8];
     } else {
-      screenScale = [3.4, 3.4, 3.4];
+      screenScale = [3.7, 3.7, 3.7];
       screenPosition = [0, -2.45, -8.7];
     }
 
@@ -175,7 +175,7 @@ const Home = () => {
                   className="text-2xl leading-none text-slate-500 hover:text-slate-900"
                   aria-label="Close modal"
                 >
-                  ×
+                  x
                 </button>
               </div>
             </motion.div>

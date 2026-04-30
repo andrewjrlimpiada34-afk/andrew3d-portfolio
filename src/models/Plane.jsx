@@ -6,6 +6,7 @@ import morionScene from "../assets/3d/morion.glb";
 
 export function Plane({ isAnimated, onClick, ...props }) {
   const ref = useRef();
+  const pointerStart = useRef({ x: 0, y: 0 });
   const { scene, animations } = useGLTF(morionScene);
   const { actions } = useAnimations(animations, ref);
 
@@ -33,8 +34,28 @@ export function Plane({ isAnimated, onClick, ...props }) {
     }
   });
 
+  const handlePointerDown = (event) => {
+    event.stopPropagation();
+    pointerStart.current = { x: event.clientX, y: event.clientY };
+  };
+
+  const handlePointerUp = (event) => {
+    event.stopPropagation();
+    const movedX = Math.abs(event.clientX - pointerStart.current.x);
+    const movedY = Math.abs(event.clientY - pointerStart.current.y);
+
+    if (movedX < 8 && movedY < 8) {
+      onClick?.();
+    }
+  };
+
   return (
-    <mesh {...props} ref={ref} onClick={onClick}>
+    <mesh
+      {...props}
+      ref={ref}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+    >
       <primitive object={scene} />
     </mesh>
   );
