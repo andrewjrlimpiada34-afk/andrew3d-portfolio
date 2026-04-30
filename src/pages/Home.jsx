@@ -44,12 +44,15 @@ const Home = () => {
     let screenScale;
     let screenPosition;
 
-    if (window.innerWidth < 768) {
-      screenScale = [0.9, 0.9, 0.9];
-      screenPosition = [0, -6.5, -43.4];
+    if (window.innerWidth < 640) {
+      screenScale = [1.9, 1.9, 1.9];
+      screenPosition = [0, -2.1, -7];
+    } else if (window.innerWidth < 1024) {
+      screenScale = [2.2, 2.2, 2.2];
+      screenPosition = [0, -2.4, -7.8];
     } else {
-      screenScale = [1, 1, 1];
-      screenPosition = [0, -6.5, -43.4];
+      screenScale = [2.5, 2.5, 2.5];
+      screenPosition = [0, -2.7, -8.5];
     }
 
     return [screenScale, screenPosition];
@@ -73,6 +76,8 @@ const Home = () => {
         className={`w-full h-screen bg-transparent ${
           isRotating ? "cursor-grabbing" : "cursor-grab"
         }`}
+        dpr={[1, 1.5]}
+        gl={{ antialias: false, powerPreference: "high-performance" }}
         camera={{ near: 0.1, far: 1000 }}
       >
         <Suspense fallback={<Loader />}>
