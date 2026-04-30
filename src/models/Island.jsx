@@ -9,6 +9,7 @@ export function Island({
   isRotating,
   setIsRotating,
   setCurrentStage,
+  onClick,
   ...props
 }) {
   const islandRef = useRef();
@@ -133,7 +134,7 @@ export function Island({
   });
 
   return (
-    <a.group ref={islandRef} {...props}>
+    <a.group ref={islandRef} {...props} onClick={onClick}>
       <primitive object={scene} />
     </a.group>
   );

@@ -4,17 +4,24 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 
 import butterflyScene from "../assets/3d/butterfly.glb";
 
-export function Bird() {
+export function Bird({ isAnimated }) {
   const butterflyRef = useRef();
   const { scene, animations } = useGLTF(butterflyScene);
   const { actions } = useAnimations(animations, butterflyRef);
 
   useEffect(() => {
-    Object.values(actions).forEach((action) => action?.play());
-  }, [actions]);
+    Object.values(actions).forEach((action) => {
+      if (!action) return;
+      if (isAnimated) {
+        action.play();
+      } else {
+        action.stop();
+      }
+    });
+  }, [actions, isAnimated]);
 
   useFrame(({ clock, camera }, delta) => {
-    if (!butterflyRef.current) {
+    if (!butterflyRef.current || !isAnimated) {
       return;
     }
 

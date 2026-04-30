@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 
 import morionScene from "../assets/3d/morion.glb";
 
-export function Plane({ isRotating, ...props }) {
+export function Plane({ isAnimated, onClick, ...props }) {
   const ref = useRef();
   const { scene, animations } = useGLTF(morionScene);
   const { actions } = useAnimations(animations, ref);
@@ -12,19 +12,19 @@ export function Plane({ isRotating, ...props }) {
   useEffect(() => {
     const animationList = Object.values(actions).filter(Boolean);
 
-    if (isRotating) {
+    if (isAnimated) {
       animationList.forEach((action) => action.play());
     } else {
       animationList.forEach((action) => action.stop());
     }
-  }, [actions, isRotating]);
+  }, [actions, isAnimated]);
 
   useFrame(({ clock }, delta) => {
     if (!ref.current) {
       return;
     }
 
-    if (isRotating) {
+    if (isAnimated) {
       ref.current.rotation.y += delta * 0.7;
       ref.current.position.y += Math.sin(clock.elapsedTime * 2.2) * delta * 0.12;
       ref.current.rotation.z = Math.sin(clock.elapsedTime * 1.8) * 0.05;
@@ -34,7 +34,7 @@ export function Plane({ isRotating, ...props }) {
   });
 
   return (
-    <mesh {...props} ref={ref}>
+    <mesh {...props} ref={ref} onClick={onClick}>
       <primitive object={scene} />
     </mesh>
   );

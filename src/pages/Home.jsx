@@ -1,10 +1,11 @@
 import { Canvas } from "@react-three/fiber";
+import { motion, AnimatePresence } from "framer-motion";
 import { Suspense, useEffect, useRef, useState } from "react";
 
 import { soundoff, soundon } from "../assets/icons";
 import sakura from "../assets/sakura.mp3";
 import { HomeInfo, Loader, SEO } from "../components";
-import { Bird, Hello, Island, Plane, Sky } from "../models";
+import { Bird, Island, Plane, Sky } from "../models";
 
 const Home = () => {
   const audioRef = useRef(new Audio(sakura));
@@ -14,6 +15,8 @@ const Home = () => {
   const [currentStage, setCurrentStage] = useState(1);
   const [isRotating, setIsRotating] = useState(false);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(true);
+  const [activeModal, setActiveModal] = useState(null);
 
   useEffect(() => {
     if (isPlayingMusic) {
@@ -30,14 +33,14 @@ const Home = () => {
     let screenPosition;
 
     if (window.innerWidth < 640) {
-      screenScale = [0.75, 0.75, 0.75];
-      screenPosition = [1.6, -1.9, 0.6];
+      screenScale = [0.58, 0.58, 0.58];
+      screenPosition = [0, -3.55, 0.3];
     } else if (window.innerWidth < 1024) {
-      screenScale = [0.9, 0.9, 0.9];
-      screenPosition = [2.1, -2.1, 0.2];
+      screenScale = [0.7, 0.7, 0.7];
+      screenPosition = [0, -3.9, -0.1];
     } else {
-      screenScale = [1.05, 1.05, 1.05];
-      screenPosition = [2.5, -2.35, -0.2];
+      screenScale = [0.82, 0.82, 0.82];
+      screenPosition = [0, -4.2, -0.5];
     }
 
     return [screenScale, screenPosition];
@@ -48,32 +51,14 @@ const Home = () => {
     let screenPosition;
 
     if (window.innerWidth < 640) {
-      screenScale = [2.4, 2.4, 2.4];
-      screenPosition = [0, -2.25, -7.4];
+      screenScale = [2.7, 2.7, 2.7];
+      screenPosition = [0, -1.95, -7.3];
     } else if (window.innerWidth < 1024) {
-      screenScale = [2.8, 2.8, 2.8];
-      screenPosition = [0, -2.55, -8.1];
-    } else {
       screenScale = [3.1, 3.1, 3.1];
-      screenPosition = [0, -2.8, -8.8];
-    }
-
-    return [screenScale, screenPosition];
-  };
-
-  const adjustHelloForScreenSize = () => {
-    let screenScale;
-    let screenPosition;
-
-    if (window.innerWidth < 640) {
-      screenScale = [0.9, 0.9, 0.9];
-      screenPosition = [0, 1.15, -6.8];
-    } else if (window.innerWidth < 1024) {
-      screenScale = [1.05, 1.05, 1.05];
-      screenPosition = [0, 1.3, -7.5];
+      screenPosition = [0, -2.2, -8];
     } else {
-      screenScale = [1.2, 1.2, 1.2];
-      screenPosition = [0, 1.45, -8.1];
+      screenScale = [3.4, 3.4, 3.4];
+      screenPosition = [0, -2.45, -8.7];
     }
 
     return [screenScale, screenPosition];
@@ -81,7 +66,18 @@ const Home = () => {
 
   const [morionScale, morionPosition] = adjustMorionForScreenSize();
   const [islandScale, islandPosition] = adjustIslandForScreenSize();
-  const [helloScale, helloPosition] = adjustHelloForScreenSize();
+
+  const modalContent = {
+    marinduque: {
+      title: "Address",
+      body: "Address: Paye, Mogpog, Marinduque.",
+    },
+    morion: {
+      title: "Morion Mask",
+      body:
+        "A symbol of tradition and identity from Marinduque, the Morion mask represents Roman soldiers in the annual Moriones Festival. Each mask is uniquely crafted, reflecting both artistry and cultural heritage.",
+    },
+  };
 
   return (
     <section className="w-full h-screen relative">
@@ -90,6 +86,15 @@ const Home = () => {
         description="Portfolio of Andrew B. Limpiada Jr., an aspiring Computer Engineer from Marinduque State College who is passionate about technology, creativity, and continuous learning."
         type="website"
       />
+      <div className="absolute top-24 right-4 z-20 sm:right-8">
+        <button
+          type="button"
+          onClick={() => setIsAnimated((prev) => !prev)}
+          className="rounded-full bg-white/85 backdrop-blur px-4 py-2 text-sm font-semibold text-slate-800 shadow-lg transition hover:bg-white"
+        >
+          {isAnimated ? "Pause Scene" : "Play Scene"}
+        </button>
+      </div>
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
         {currentStage && <HomeInfo currentStage={currentStage} />}
       </div>
@@ -118,8 +123,8 @@ const Home = () => {
             intensity={1}
           />
 
-          <Bird />
-          <Sky isRotating={isRotating} />
+          <Bird isAnimated={isAnimated} />
+          <Sky isAnimated={isAnimated} />
           <Island
             isRotating={isRotating}
             setIsRotating={setIsRotating}
@@ -127,20 +132,56 @@ const Home = () => {
             position={islandPosition}
             rotation={[0.1, 4.7077, 0]}
             scale={islandScale}
-          />
-          <Hello
-            position={helloPosition}
-            rotation={[0.05, 0, 0]}
-            scale={helloScale}
+            onClick={() => setActiveModal("marinduque")}
           />
           <Plane
-            isRotating={isRotating}
+            isAnimated={isAnimated}
             position={morionPosition}
             rotation={[0, 5.2, 0]}
             scale={morionScale}
+            onClick={() => setActiveModal("morion")}
           />
         </Suspense>
       </Canvas>
+
+      <AnimatePresence>
+        {activeModal && (
+          <motion.div
+            className="absolute inset-0 z-30 flex items-center justify-center bg-black/45 px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveModal(null)}
+          >
+            <motion.div
+              className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl"
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900">
+                    {modalContent[activeModal].title}
+                  </h3>
+                  <p className="mt-3 text-slate-600 leading-relaxed">
+                    {modalContent[activeModal].body}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveModal(null)}
+                  className="text-2xl leading-none text-slate-500 hover:text-slate-900"
+                  aria-label="Close modal"
+                >
+                  ×
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="absolute bottom-2 left-2">
         <img
