@@ -7,14 +7,19 @@ const SEO = ({
   type = "website",
   keywords = "Andrew B. Limpiada Jr., Computer Engineering, Marinduque State College, Portfolio, React, JavaScript, MongoDB, MySQL",
   image = "/favicon/web-app-manifest-512x512.png",
-  url = "https://example.com",
+  url = import.meta.env.VITE_SITE_URL,
   locale = "en_US",
   publishedAt,
   modifiedAt = new Date().toISOString(),
   article,
 }) => {
   const { pathname } = useLocation();
-  const siteUrl = url.replace(/\/$/, "");
+  const runtimeOrigin =
+    typeof window !== "undefined" ? window.location.origin : "";
+  const siteUrl = (url || runtimeOrigin || "https://andrew3d-portfolio.onrender.com").replace(
+    /\/$/,
+    ""
+  );
   const canonicalUrl = `${siteUrl}${pathname}`;
   const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
 

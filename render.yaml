@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: andrew3d-portfolio
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: VITE_SITE_URL
+        value: https://andrew3d-portfolio.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

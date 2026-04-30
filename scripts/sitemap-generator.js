@@ -11,6 +11,9 @@ const routes = [
   "/contact",
 ];
 
+const hostname =
+  process.env.VITE_SITE_URL || "https://andrew3d-portfolio.onrender.com";
+
 const generateSitemap = async () => {
   try {
     const routeObjects = routes.map((route) => ({
@@ -21,7 +24,7 @@ const generateSitemap = async () => {
     }));
 
     const stream = new SitemapStream({
-      hostname: "https://example.com",
+      hostname,
     });
 
     const data = await streamToPromise(
