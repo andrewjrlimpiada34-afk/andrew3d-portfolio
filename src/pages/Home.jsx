@@ -5,7 +5,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { soundoff, soundon } from "../assets/icons";
 import sakura from "../assets/sakura.mp3";
 import { HomeInfo, Loader, SEO } from "../components";
-import { Bird, Island, Plane, Sky } from "../models";
+import { Butterfly, Marinduque, Morion, Sky } from "../models";
 
 const Home = () => {
   const audioRef = useRef(new Audio(sakura));
@@ -123,9 +123,9 @@ const Home = () => {
             intensity={1}
           />
 
-          <Bird isAnimated={isAnimated} />
+<Butterfly isAnimated={isAnimated} />
           <Sky isAnimated={isAnimated} />
-          <Island
+          <Marinduque
             isRotating={isRotating}
             setIsRotating={setIsRotating}
             setCurrentStage={setCurrentStage}
@@ -134,7 +134,7 @@ const Home = () => {
             scale={islandScale}
             onClick={() => setActiveModal("marinduque")}
           />
-          <Plane
+          <Morion
             isAnimated={isAnimated}
             position={morionPosition}
             rotation={[0, 5.2, 0]}

@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 
 import morionScene from "../assets/3d/morion.glb";
 
-export function Plane({ isAnimated, onClick, ...props }) {
+export function Morion({ isAnimated, onClick, ...props }) {
   const ref = useRef();
   const pointerStart = useRef({ x: 0, y: 0 });
   const { scene, animations } = useGLTF(morionScene);

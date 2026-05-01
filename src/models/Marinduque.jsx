@@ -5,7 +5,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 
 import marinduqueScene from "../assets/3d/marinduque.glb";
 
-export function Island({
+export function Marinduque({
   isRotating,
   setIsRotating,
   setCurrentStage,

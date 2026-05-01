@@ -4,7 +4,7 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 
 import butterflyScene from "../assets/3d/butterfly.glb";
 
-export function Bird({ isAnimated }) {
+export function Butterfly({ isAnimated }) {
   const butterflyRef = useRef();
   const { scene, animations } = useGLTF(butterflyScene);
   const { actions } = useAnimations(animations, butterflyRef);
