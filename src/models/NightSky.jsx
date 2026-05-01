@@ -16,8 +16,8 @@ export function NightSky({ isAnimated }) {
     }
   });
 
-  return (
-    <mesh ref={skyRef}>
+return (
+    <mesh ref={skyRef} scale={0.15}>
       <primitive object={night.scene} />
     </mesh>
   );

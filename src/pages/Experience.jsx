@@ -6,9 +6,9 @@ import { useTheme } from "../context/ThemeContext";
 const Experience = () => {
   const { isDarkMode } = useTheme();
   
-  // Dynamic classes
+// Dynamic classes - full grey background in dark mode
   const sectionClass = isDarkMode 
-    ? "bg-gray-900 dark-mode-bg" 
+    ? "bg-[#1a1a2e]" 
     : "bg-slate-300/20";
   const cardBaseClass = isDarkMode 
     ? "dark-bg-card silver-glow" 
