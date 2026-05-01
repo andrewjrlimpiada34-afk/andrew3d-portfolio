@@ -43,7 +43,7 @@ export function Bird({ isAnimated }) {
     <mesh
       ref={butterflyRef}
       position={[-4, 2.2, 1]}
-      scale={[0.0025, 0.0025, 0.0025]}
+      scale={[0.015, 0.015, 0.015]}
     >
       <primitive object={scene} />
     </mesh>
