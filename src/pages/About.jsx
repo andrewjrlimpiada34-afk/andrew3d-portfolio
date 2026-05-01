@@ -69,7 +69,7 @@ return (
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.7 }}
         >
-          Currently, I am taking up Bachelor of Science in Computer Engineering at Marinduque State College. As a student in this field, I am continuously developing my skills in programming, problem-solving, and system design. I am especially interested in how technology can be used to improve everyday processes and create meaningful solutions.
+          Currently, I am taking up Bachelor of Science in Computer Engineering at Marinduque State University. As a student in this field, I am continuously developing my skills in programming, problem-solving, and system design. I am especially interested in how technology can be used to improve everyday processes and create meaningful solutions.
         </motion.p>
 
         <motion.p

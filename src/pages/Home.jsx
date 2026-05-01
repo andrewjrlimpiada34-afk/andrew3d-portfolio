@@ -73,8 +73,8 @@ const Home = () => {
 
   const modalContent = {
     marinduque: {
-      title: "Address",
-      body: "Address: Paye, Mogpog, Marinduque.",
+      title: "My Home",
+      body: "Hi, this is my province, Marinduque—a place where every corner tells a story, where traditions are not just remembered but lived, and where the warmth of the people feels like home. From vibrant festivals to serene landscapes, it is an island that quietly captures your heart and leaves a lasting impression.",
     },
     morion: {
       title: "Morion Mask",
