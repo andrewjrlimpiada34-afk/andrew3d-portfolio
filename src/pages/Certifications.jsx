@@ -14,19 +14,19 @@ const Certifications = () => {
   
   const certifications = [
     {
-      title: "Grade 10 Certificate",
+      title: "Grade 10 2nd Quarter",
       image: grade10,
       org: "AcadCertificates Folder",
       description: "One of my academic certificates stored in the local AcadCertificates collection.",
     },
     {
-      title: "Grade 10 Certificate Alternate",
+      title: "Grade 10 Certificate",
       image: grade10Alt,
       org: "AcadCertificates Folder",
       description: "An alternate academic certificate image included in my certificate folder.",
     },
     {
-      title: "Grade 10 With Honors",
+      title: "Grade 10 1st Quarter",
       image: grade10Wh,
       org: "AcadCertificates Folder",
       description: "This certificate is part of the academic recognitions I have placed in my portfolio assets.",
@@ -44,13 +44,13 @@ const Certifications = () => {
       description: "Another certificate image from my Grade 11 achievements.",
     },
     {
-      title: "Junior High Certificate",
+      title: "Junior High Completion",
       image: juniorhigh,
       org: "AcadCertificates Folder",
       description: "A certificate from my junior high academic journey.",
     },
     {
-      title: "Wika Certificate",
+      title: "Buwan Ng Wika Poster Contest",
       image: wika,
       org: "AcadCertificates Folder",
       description: "A certificate included in my portfolio's local academic certificate archive.",
