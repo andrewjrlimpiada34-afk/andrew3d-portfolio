@@ -1,6 +1,7 @@
 import { contact, github, javascript, linkedin, mongodb, mysql } from "../assets/icons";
 import react from "../assets/react.svg";
 import portfolioPreview from "../assets/images/project-1.webp";
+import bodImage from "../assets/images/bod.jpg";
 import matlabLogo from "../assets/matlab/matlablogo.png";
 import ciscoLogo from "../assets/cisco/ciscologo.png";
 
@@ -26,6 +27,7 @@ export const experiences = [
     company: "Student Leadership Experience",
     type: "Campus Involvement",
     duration: "First Year",
+    image: bodImage,
     description:
       "Served as a member of the Board of Directors during my first year, building experience in leadership, teamwork, and responsibility within the student community.",
   },

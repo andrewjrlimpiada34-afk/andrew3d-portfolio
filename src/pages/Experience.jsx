@@ -47,13 +47,22 @@ return (
 
         <div className="mt-12 flex flex-col gap-8">
           {experiences.map((experience, index) => (
-            <motion.div
+<motion.div
               key={index}
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className={`flex flex-col sm:flex-row gap-6 p-8 rounded-lg backdrop-blur-md border border-white/10 ${cardBaseClass}`}
+              className={`flex flex-col sm:flex-row gap-6 p-4 sm:p-6 rounded-2xl backdrop-blur-md border border-white/10 ${cardBaseClass}`}
             >
+              {experience.image && (
+                <div className="w-full sm:w-48 h-48 shrink-0 mb-4 sm:mb-0">
+                  <img 
+                    src={experience.image} 
+                    alt={experience.title}
+                    className="w-full h-full object-cover rounded-xl"
+                  />
+                </div>
+              )}
               <div className="flex-1">
                 <div className="flex items-center gap-4">
                   <h3 className={`text-3xl font-bold ${titleClass}`}>
