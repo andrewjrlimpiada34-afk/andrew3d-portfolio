@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom";
-
+import { useTheme } from "../context/ThemeContext";
 import { socialLinks } from "../constants";
 
 const Footer = () => {
+  const { isDarkMode } = useTheme();
+
+  const footerTextClass = isDarkMode 
+    ? "text-white" 
+    : "text-slate-600";
+
   return (
     <footer className="footer font-poppins">
       <hr className="border-slate-200" />
 
       <div className="footer-container">
-        <p>
+        <p className={footerTextClass}>
           © 2026 <strong>Andrew B. Limpiada Jr.</strong>. All rights reserved.
         </p>
 

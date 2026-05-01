@@ -1,11 +1,28 @@
 import { motion } from "framer-motion";
 import { CTA, SEO } from "../components";
 import { skills } from "../constants";
+import { useTheme } from "../context/ThemeContext";
 
 const About = () => {
+  const { isDarkMode } = useTheme();
+
+  // Dynamic classes
+  const sectionClass = isDarkMode 
+    ? "bg-[#1a1a2e]" 
+    : "bg-slate-300/20";
+  const textClass = isDarkMode 
+    ? "text-white" 
+    : "text-slate-500";
+  const quoteClass = isDarkMode 
+    ? "text-white" 
+    : "text-slate-700";
+  const skillsTextClass = isDarkMode 
+    ? "text-gray-300" 
+    : "text-slate-500";
+
   return (
     <motion.section
-      className="max-container"
+      className={`max-container ${sectionClass} theme-transition`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -18,7 +35,7 @@ const About = () => {
       />
 
       <motion.h1
-        className="head-text"
+        className={`head-text ${isDarkMode ? 'text-white' : ''}`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
@@ -34,7 +51,7 @@ const About = () => {
       </motion.h1>
 
       <motion.div
-        className="mt-5 flex flex-col gap-3 text-slate-500"
+        className={`mt-5 flex flex-col gap-3 ${textClass}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -64,7 +81,7 @@ const About = () => {
         </motion.p>
 
         <motion.p
-          className="font-semibold text-slate-700"
+          className={`font-semibold ${quoteClass}`}
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.9 }}
@@ -74,10 +91,10 @@ const About = () => {
       </motion.div>
 
       <div className="py-10 flex flex-col">
-        <h3 className="subhead-text">My Skills</h3>
+        <h3 className={`subhead-text ${isDarkMode ? 'text-white' : ''}`}>My Skills</h3>
 
         <div className="mt-6">
-          <p className="text-slate-500">MySQL, MongoDB, React, JS</p>
+          <p className={skillsTextClass}>MySQL, MongoDB, React, JS</p>
         </div>
 
         <div className="mt-12 flex flex-wrap gap-12">
