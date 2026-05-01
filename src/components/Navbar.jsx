@@ -3,11 +3,20 @@ import { NavLink } from "react-router-dom";
 
 import logo from "../assets/images/logo.webp";
 import HamburgerMenu from "./HamburgerMenu";
+import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "../context/ThemeContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isDarkMode } = useTheme();
+  
+  // Dynamic classes for dark mode
+  const navLinkClass = isDarkMode ? "text-white" : "text-black";
+  const hamburgerLineClass = isDarkMode ? "bg-white" : "bg-black";
+  const activeClass = "text-blue-600";
+  
   return (
-    <header className="header flex items-center justify-between">
+    <header className={`header flex items-center justify-between ${isDarkMode ? 'dark-navbar' : ''}`}>
       <NavLink to="/" className="flex items-center shrink-0">
         <img
           src={logo}
@@ -16,11 +25,11 @@ const Navbar = () => {
         />
       </NavLink>
       {/* Desktop nav */}
-      <nav className="hidden sm:flex text-lg gap-7 font-medium">
+      <nav className="hidden sm:flex text-lg gap-7 font-medium items-center">
         <NavLink
           to="/about"
           className={({ isActive }) =>
-            isActive ? "text-blue-600" : "text-black"
+            isActive ? activeClass : navLinkClass
           }
         >
           About
@@ -28,7 +37,7 @@ const Navbar = () => {
         <NavLink
           to="/experience"
           className={({ isActive }) =>
-            isActive ? "text-blue-600" : "text-black"
+            isActive ? activeClass : navLinkClass
           }
         >
           Experience
@@ -36,7 +45,7 @@ const Navbar = () => {
         <NavLink
           to="/projects"
           className={({ isActive }) =>
-            isActive ? "text-blue-600" : "text-black"
+            isActive ? activeClass : navLinkClass
           }
         >
           Projects
@@ -44,7 +53,7 @@ const Navbar = () => {
         <NavLink
           to="/certifications"
           className={({ isActive }) =>
-            isActive ? "text-blue-600" : "text-black"
+            isActive ? activeClass : navLinkClass
           }
         >
           Certifications
@@ -52,22 +61,29 @@ const Navbar = () => {
         <NavLink
           to="/contact"
           className={({ isActive }) =>
-            isActive ? "text-blue-600" : "text-black"
+            isActive ? activeClass : navLinkClass
           }
         >
           Contact
         </NavLink>
+        {/* Theme toggle beside Contact button on desktop */}
+        <ThemeToggle />
       </nav>
-      {/* Hamburger icon for mobile */}
-      <button
-        className="sm:hidden flex flex-col justify-center items-center w-10 h-10 rounded focus:outline-none"
-        onClick={() => setMenuOpen(true)}
-        aria-label="Open menu"
-      >
-        <span className="block w-7 h-1 bg-black mb-1 rounded"></span>
-        <span className="block w-7 h-1 bg-black mb-1 rounded"></span>
-        <span className="block w-7 h-1 bg-black rounded"></span>
-      </button>
+      
+      {/* Mobile view: hamburger and theme toggle container */}
+      <div className="sm:hidden flex items-center gap-3">
+        <ThemeToggle />
+        {/* Hamburger icon for mobile */}
+        <button
+          className="flex flex-col justify-center items-center w-10 h-10 rounded focus:outline-none"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+        >
+          <span className={`block w-7 h-1 ${hamburgerLineClass} mb-1 rounded`}></span>
+          <span className={`block w-7 h-1 ${hamburgerLineClass} mb-1 rounded`}></span>
+          <span className={`block w-7 h-1 ${hamburgerLineClass} rounded`}></span>
+        </button>
+      </div>
       {/* Mobile menu */}
       <HamburgerMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </header>

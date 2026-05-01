@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 
 import { github, linkedin } from "../assets/icons";
 import { SEO } from "../components";
+import { useTheme } from "../context/ThemeContext";
 
 const Contact = () => {
+  const { isDarkMode } = useTheme();
+  
   const profiles = [
     {
       name: "GitHub",
@@ -19,9 +22,29 @@ const Contact = () => {
     },
   ];
 
+  // Dynamic classes
+  const sectionClass = isDarkMode 
+    ? "bg-gray-900 dark-mode-bg" 
+    : "bg-slate-300/20";
+  const cardBaseClass = isDarkMode 
+    ? "dark-bg-card silver-glow silver-glow-hover" 
+    : "bg-white";
+  const titleClass = isDarkMode 
+    ? "text-white" 
+    : "";
+  const descClass = isDarkMode 
+    ? "text-gray-300" 
+    : "text-slate-600";
+  const profileNameClass = isDarkMode 
+    ? "text-white" 
+    : "text-slate-800";
+  const profileValueClass = isDarkMode 
+    ? "text-gray-300" 
+    : "text-slate-600";
+
   return (
     <motion.section
-      className="relative max-container"
+      className={`relative max-container ${sectionClass} theme-transition`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -40,7 +63,7 @@ const Contact = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <motion.h1
-          className="head-text"
+          className={`head-text ${titleClass}`}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -49,7 +72,7 @@ const Contact = () => {
         </motion.h1>
 
         <motion.p
-          className="text-slate-600 mt-5 max-w-2xl"
+          className={`mt-5 max-w-2xl ${descClass}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -69,7 +92,7 @@ const Contact = () => {
               href={profile.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-2xl shadow-lg p-6 flex items-center gap-4 hover:shadow-xl transition-shadow"
+              className={`rounded-2xl shadow-lg p-6 flex items-center gap-4 hover:shadow-xl transition-shadow ${cardBaseClass}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
@@ -77,8 +100,8 @@ const Contact = () => {
             >
               <img src={profile.icon} alt={profile.name} className="w-10 h-10" />
               <div>
-                <p className="text-lg font-semibold text-slate-800">{profile.name}</p>
-                <p className="text-slate-600 break-all">{profile.value}</p>
+                <p className={`text-lg font-semibold ${profileNameClass}`}>{profile.name}</p>
+                <p className={`break-all ${profileValueClass}`}>{profile.value}</p>
               </div>
             </motion.a>
           ))}

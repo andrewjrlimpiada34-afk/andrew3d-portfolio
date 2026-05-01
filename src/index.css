@@ -21,6 +21,87 @@ body:has(.card[data-color="green"]:hover) {
   background-color: rgb(var(--green-rgb) / 25%);
 }
 
+/* Dark Mode Styles */
+body.light-mode {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+body.dark-mode {
+  background-color: #1a1a2e;
+  color: #f8fafc;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+}
+
+.theme-toggle:hover {
+  box-shadow: 0 0 15px rgba(192, 192, 192, 0.5);
+}
+
+/* Dark Navbar */
+.dark-navbar {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+}
+
+/* Dark Mode Background for Home */
+.dark-mode-bg {
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a15 100%);
+}
+
+/* Theme Transition */
+.theme-transition {
+  transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+/* Silver Glow Effect for Cards */
+.silver-glow {
+  box-shadow: 
+    0 0 20px rgba(192, 192, 192, 0.15),
+    0 0 40px rgba(192, 192, 192, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.silver-glow-hover:hover {
+  box-shadow: 
+    0 0 25px rgba(192, 192, 192, 0.25),
+    0 0 50px rgba(192, 192, 192, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Dark Mode Text Colors */
+.dark-text-primary {
+  @apply text-white;
+}
+
+.dark-text-secondary {
+  @apply text-gray-300;
+}
+
+.dark-text-muted {
+  @apply text-gray-400;
+}
+
+.dark-bg-card {
+  background: linear-gradient(135deg, #2d2d44 0%, #1a1a2e 100%);
+  border: 1px solid rgba(192, 192, 192, 0.2);
+}
+
+.dark-border {
+  border-color: rgba(192, 192, 192, 0.15);
+}
+
 @layer utilities {
   .max-container {
     @apply max-w-5xl mx-auto sm:p-16 pb-12 !pt-[126px] px-8 min-h-[calc(100vh-80px)];

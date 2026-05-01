@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { github, internet } from "../assets/icons";
 import { CTA, SEO } from "../components";
 import { projects } from "../constants";
+import { useTheme } from "../context/ThemeContext";
 
 const Projects = () => {
+  const { isDarkMode } = useTheme();
+  
   const handleDownload = (pdfUrl, fileName) => {
     const link = document.createElement("a");
     link.href = pdfUrl;
@@ -12,9 +15,32 @@ const Projects = () => {
     link.click();
   };
 
+  // Dynamic classes
+  const sectionClass = isDarkMode 
+    ? "bg-gray-900 dark-mode-bg" 
+    : "bg-slate-300/20";
+  const categoryTitleClass = isDarkMode 
+    ? "text-white" 
+    : "text-slate-800";
+  const cardBaseClass = isDarkMode 
+    ? "dark-bg-card silver-glow silver-glow-hover" 
+    : "bg-white";
+  const cardImageBgClass = isDarkMode 
+    ? "bg-gray-700" 
+    : "bg-gray-50";
+  const projectTitleClass = isDarkMode 
+    ? "text-white" 
+    : "text-gray-800";
+  const projectDescClass = isDarkMode 
+    ? "text-gray-300" 
+    : "text-gray-600";
+  const descriptionClass = isDarkMode 
+    ? "text-gray-300" 
+    : "text-slate-500";
+
   return (
     <motion.section
-      className="max-container"
+      className={`max-container ${sectionClass} theme-transition`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -27,7 +53,7 @@ const Projects = () => {
       />
 
       <motion.h1
-        className="head-text"
+        className={`head-text ${isDarkMode ? 'text-white' : ''}`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -43,7 +69,7 @@ const Projects = () => {
       </motion.h1>
 
       <motion.p
-        className="text-slate-500 mt-2 leading-relaxed"
+        className={`mt-2 leading-relaxed ${descriptionClass}`}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -60,7 +86,7 @@ const Projects = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 + categoryIndex * 0.1 }}
         >
-          <h2 className="text-3xl font-bold text-slate-800 mb-8">
+          <h2 className={`text-3xl font-bold mb-8 ${categoryTitleClass}`}>
             {category.category}
           </h2>
 
@@ -73,7 +99,7 @@ const Projects = () => {
             {category.items.map((project, index) => (
               <motion.div
                 key={project.name}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className={`rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBaseClass}`}
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
@@ -82,7 +108,7 @@ const Projects = () => {
                 }}
                 whileHover={{ y: -10 }}
               >
-                <div className="relative h-48 w-full bg-gray-50 flex items-center justify-center">
+                <div className={`relative h-48 w-full flex items-center justify-center ${cardImageBgClass}`}>
                   <img
                     src={project.image}
                     alt={project.name}
@@ -91,10 +117,10 @@ const Projects = () => {
                 </div>
 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-gray-800">
+                  <h3 className={`text-xl font-bold mb-2 ${projectTitleClass}`}>
                     {project.name}
                   </h3>
-                  <p className="text-gray-600 mb-4 text-sm">
+                  <p className={`mb-4 text-sm ${projectDescClass}`}>
                     {project.description}
                   </p>
                   <div className="flex gap-3 mt-4">
@@ -119,7 +145,9 @@ const Projects = () => {
                         to={project.sourceCode}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 border border-blue-500 text-blue-500 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors duration-300 flex items-center justify-center gap-2 text-sm"
+                        className={`flex-1 border border-blue-500 text-blue-500 py-2 px-3 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 text-sm ${
+                          isDarkMode ? "hover:bg-gray-700" : "hover:bg-blue-50"
+                        }`}
                       >
                         <img src={github} alt="Source Code" className="w-4 h-4" />
                         Code

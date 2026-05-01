@@ -5,7 +5,8 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { soundoff, soundon } from "../assets/icons";
 import sakura from "../assets/sakura.mp3";
 import { HomeInfo, Loader, SEO } from "../components";
-import { Butterfly, Marinduque, Morion, Sky } from "../models";
+import { Butterfly, Marinduque, Morion, Sky, NightSky } from "../models";
+import { useTheme } from "../context/ThemeContext";
 
 const Home = () => {
   const audioRef = useRef(new Audio(sakura));
@@ -17,6 +18,9 @@ const Home = () => {
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
   const [isAnimated, setIsAnimated] = useState(true);
   const [activeModal, setActiveModal] = useState(null);
+  
+  // Theme context
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     if (isPlayingMusic) {
@@ -79,8 +83,14 @@ const Home = () => {
     },
   };
 
+  // Dynamic background based on theme
+  const canvasBgClass = isDarkMode ? "bg-gray-900" : "bg-transparent";
+  const sceneButtonClass = isDarkMode 
+    ? "bg-gray-700/90 text-white hover:bg-gray-600" 
+    : "bg-white/85 text-slate-800 hover:bg-white";
+
   return (
-    <section className="w-full h-screen relative z-0">
+    <section className={`w-full h-screen relative z-0 theme-transition ${isDarkMode ? 'dark-mode-bg' : ''}`}>
       <SEO
         title="Andrew B. Limpiada Jr. | Aspiring Computer Engineer"
         description="Portfolio of Andrew B. Limpiada Jr., an aspiring Computer Engineer from Marinduque State College who is passionate about technology, creativity, and continuous learning."
@@ -90,7 +100,7 @@ const Home = () => {
         <button
           type="button"
           onClick={() => setIsAnimated((prev) => !prev)}
-          className="rounded-full bg-white/85 backdrop-blur px-4 py-2 text-sm font-semibold text-slate-800 shadow-lg transition hover:bg-white"
+          className={`rounded-full backdrop-blur px-4 py-2 text-sm font-semibold shadow-lg transition ${sceneButtonClass}`}
         >
           {isAnimated ? "Pause Scene" : "Play Scene"}
         </button>
@@ -108,39 +118,58 @@ const Home = () => {
         camera={{ near: 0.1, far: 1000, position: [0, 0, 10], fov: 45 }}
       >
         <Suspense fallback={<Loader />}>
-          <directionalLight position={[1, 1, 1]} intensity={2} />
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 5, 10]} intensity={2} />
+          {/* Dynamic lighting based on theme */}
+          <directionalLight 
+            position={[1, 1, 1]} 
+            intensity={isDarkMode ? 0.8 : 2} 
+          />
+          <ambientLight intensity={isDarkMode ? 0.3 : 0.5} />
+          <pointLight 
+            position={[10, 5, 10]} 
+            intensity={isDarkMode ? 0.5 : 2} 
+            color={isDarkMode ? "#c0c0c0" : "#ffffff"}
+          />
           <spotLight
             position={[0, 50, 10]}
             angle={0.15}
             penumbra={1}
-            intensity={2}
+            intensity={isDarkMode ? 0.8 : 2}
           />
           <hemisphereLight
-            skyColor="#b1e1ff"
-            groundColor="#000000"
-            intensity={1}
+            skyColor={isDarkMode ? "#1a1a2e" : "#b1e1ff"}
+            groundColor={isDarkMode ? "#0a0a0a" : "#000000"}
+            intensity={isDarkMode ? 0.4 : 1}
           />
 
-<Butterfly isAnimated={isAnimated} />
-          <Sky isAnimated={isAnimated} />
-          <Marinduque
-            isRotating={isRotating}
-            setIsRotating={setIsRotating}
-            setCurrentStage={setCurrentStage}
-            position={islandPosition}
-            rotation={[0.1, 4.7077, 0]}
-            scale={islandScale}
-            onClick={() => setActiveModal("marinduque")}
-          />
-          <Morion
-            isAnimated={isAnimated}
-            position={morionPosition}
-            rotation={[0, 5.2, 0]}
-            scale={morionScale}
-            onClick={() => setActiveModal("morion")}
-          />
+          {/* Sky model - swap between day/night */}
+          {isDarkMode ? (
+            <NightSky isAnimated={isAnimated} />
+          ) : (
+            <Sky isAnimated={isAnimated} />
+          )}
+          
+          {/* Hide these models in dark mode */}
+          {!isDarkMode && (
+            <>
+              <Butterfly isAnimated={isAnimated} />
+              <Marinduque
+                isRotating={isRotating}
+                setIsRotating={setIsRotating}
+                setCurrentStage={setCurrentStage}
+                position={islandPosition}
+                rotation={[0.1, 4.7077, 0]}
+                scale={islandScale}
+                onClick={() => setActiveModal("marinduque")}
+              />
+              <Morion
+                isAnimated={isAnimated}
+                position={morionPosition}
+                rotation={[0, 5.2, 0]}
+                scale={morionScale}
+                onClick={() => setActiveModal("morion")}
+              />
+            </>
+          )}
         </Suspense>
       </Canvas>
 
@@ -154,7 +183,9 @@ const Home = () => {
             onClick={() => setActiveModal(null)}
           >
             <motion.div
-              className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl"
+              className={`w-full max-w-md rounded-2xl p-6 shadow-2xl ${
+                isDarkMode ? "bg-gray-800" : "bg-white"
+              }`}
               initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.92, opacity: 0 }}
@@ -162,17 +193,23 @@ const Home = () => {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900">
+                  <h3 className={`text-xl font-bold ${
+                    isDarkMode ? "text-white" : "text-slate-900"
+                  }`}>
                     {modalContent[activeModal].title}
                   </h3>
-                  <p className="mt-3 text-slate-600 leading-relaxed">
+                  <p className={`mt-3 leading-relaxed ${
+                    isDarkMode ? "text-gray-300" : "text-slate-600"
+                  }`}>
                     {modalContent[activeModal].body}
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="text-2xl leading-none text-slate-500 hover:text-slate-900"
+                  className={`text-2xl leading-none hover:text-slate-900 ${
+                    isDarkMode ? "text-gray-400 hover:text-white" : "text-slate-500"
+                  }`}
                   aria-label="Close modal"
                 >
                   x

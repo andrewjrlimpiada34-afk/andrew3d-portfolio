@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import { useTheme } from "../context/ThemeContext";
 import grade10 from "../assets/AcadCertificates/grade10.jpg";
 import grade10Alt from "../assets/AcadCertificates/grade10-1.jpg";
 import grade10Wh from "../assets/AcadCertificates/grade10-wh.jpg";
@@ -9,6 +10,8 @@ import juniorhigh from "../assets/AcadCertificates/juniorhigh.jpg";
 import wika from "../assets/AcadCertificates/wika.jpg";
 
 const Certifications = () => {
+  const { isDarkMode } = useTheme();
+  
   const certifications = [
     {
       title: "Grade 10 Certificate",
@@ -54,9 +57,32 @@ const Certifications = () => {
     },
   ];
 
+  // Dynamic classes
+  const sectionClass = isDarkMode 
+    ? "bg-gray-900 dark-mode-bg" 
+    : "bg-slate-300/20";
+  const cardBaseClass = isDarkMode 
+    ? "dark-bg-card silver-glow silver-glow-hover" 
+    : "bg-white";
+  const certTitleClass = isDarkMode 
+    ? "text-white" 
+    : "text-gray-900";
+  const certDescClass = isDarkMode 
+    ? "text-gray-300" 
+    : "text-gray-600";
+  const labelClass = isDarkMode 
+    ? "bg-gray-600 text-white" 
+    : "bg-gray-400 text-white";
+  const buttonClass = isDarkMode 
+    ? "bg-gray-600" 
+    : "bg-blue-600";
+  const descriptionTextClass = isDarkMode 
+    ? "text-gray-300" 
+    : "text-slate-500";
+
   return (
     <motion.section
-      className="max-container"
+      className={`max-container ${sectionClass} theme-transition`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -64,7 +90,7 @@ const Certifications = () => {
       <SEO title="Certificates | Andrew B. Limpiada Jr." />
 
       <motion.h1
-        className="head-text"
+        className={`head-text ${isDarkMode ? 'text-white' : ''}`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -80,7 +106,7 @@ const Certifications = () => {
       </motion.h1>
 
       <motion.div
-        className="mt-5 flex flex-col gap-3 text-slate-500"
+        className={`mt-5 flex flex-col gap-3 ${descriptionTextClass}`}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -116,7 +142,7 @@ const Certifications = () => {
               scale: 1.02,
               transition: { duration: 0.2 },
             }}
-            className="w-full p-4 rounded-2xl bg-white shadow-xl hover:shadow-2xl transition-shadow flex flex-col"
+            className={`w-full p-4 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow flex flex-col ${cardBaseClass}`}
           >
             <motion.div
               className="relative w-full h-48 mb-4"
@@ -134,7 +160,7 @@ const Certifications = () => {
             </motion.div>
 
             <motion.h3
-              className="text-xl font-bold mb-2 text-gray-900"
+              className={`text-xl font-bold mb-2 ${certTitleClass}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 1.2 + index * 0.1 }}
@@ -143,7 +169,7 @@ const Certifications = () => {
             </motion.h3>
 
             <motion.h4
-              className="w-fit bg-gray-400 text-white text-xs px-2 py-1 rounded-lg"
+              className={`w-fit text-xs px-2 py-1 rounded-lg ${labelClass}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 1.3 + index * 0.1 }}
@@ -152,7 +178,7 @@ const Certifications = () => {
             </motion.h4>
 
             <motion.p
-              className="text-gray-600 mb-4"
+              className={`mb-4 ${certDescClass}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 1.4 + index * 0.1 }}
@@ -161,7 +187,7 @@ const Certifications = () => {
             </motion.p>
 
             <motion.div
-              className="bg-blue-600 text-white px-3 py-2 rounded-lg mt-auto w-fit self-start text-sm"
+              className={`${buttonClass} text-white px-3 py-2 rounded-lg mt-auto w-fit self-start text-sm`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 1.5 + index * 0.1 }}
