@@ -65,11 +65,7 @@ const Projects = () => {
           </h2>
 
           <motion.div
-            className={`grid gap-8 ${
-              category.category === "Team Project"
-                ? "grid-cols-1"
-                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            }`}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 + categoryIndex * 0.1 }}
@@ -86,11 +82,11 @@ const Projects = () => {
                 }}
                 whileHover={{ y: -10 }}
               >
-                <div className="relative h-48 w-full">
+                <div className="relative h-48 w-full bg-gray-50 flex items-center justify-center">
                   <img
                     src={project.image}
                     alt={project.name}
-                    className="w-full h-full object-cover"
+                    className="max-w-full max-h-full object-contain p-4"
                   />
                 </div>
 
@@ -141,7 +137,7 @@ const Projects = () => {
                         }
                         className="flex-1 bg-blue-500 text-white py-2 px-3 rounded-lg hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center gap-2 text-sm"
                       >
-                        📥 Download
+                        Download
                       </button>
                     )}
                   </div>
