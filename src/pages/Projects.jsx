@@ -22,8 +22,8 @@ const Projects = () => {
   const categoryTitleClass = isDarkMode 
     ? "text-white" 
     : "text-slate-800";
-  const cardBaseClass = isDarkMode 
-    ? "dark-bg-card silver-glow silver-glow-hover" 
+const cardBaseClass = isDarkMode 
+    ? "dark-bg-card silver-glow-hover" 
     : "bg-white";
   const cardImageBgClass = isDarkMode 
     ? "bg-gray-700" 

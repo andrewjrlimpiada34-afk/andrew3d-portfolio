@@ -8,9 +8,9 @@ const ctaTextClass = isDarkMode
     ? "text-white" 
     : "text-slate-800";
 
-  return (
+return (
     <section className="cta">
-      <p className={`cta-text ${ctaTextClass}`}>
+      <p className={`cta-text ${ctaTextClass} ${isDarkMode ? '!text-white' : ''}`}>
         Interested in my portfolio journey? <br className="sm:block hidden" />
         Let's connect and explore more.
       </p>

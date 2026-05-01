@@ -61,8 +61,8 @@ const Certifications = () => {
   const sectionClass = isDarkMode 
     ? "bg-[#1a1a2e]" 
     : "bg-slate-300/20";
-  const cardBaseClass = isDarkMode 
-    ? "dark-bg-card silver-glow silver-glow-hover" 
+const cardBaseClass = isDarkMode
+    ? "dark-bg-card silver-glow-hover"
     : "bg-white";
   const certTitleClass = isDarkMode 
     ? "text-white" 
