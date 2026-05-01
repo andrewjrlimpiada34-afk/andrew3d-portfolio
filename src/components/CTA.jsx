@@ -4,9 +4,9 @@ import { useTheme } from "../context/ThemeContext";
 const CTA = () => {
   const { isDarkMode } = useTheme();
 
-  const ctaTextClass = isDarkMode 
+const ctaTextClass = isDarkMode 
     ? "text-white" 
-    : "text-black-500";
+    : "text-slate-800";
 
   return (
     <section className="cta">

@@ -29,11 +29,11 @@ const ThemeToggle = ({ className = "" }) => {
               exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="absolute inset-0 flex items-center justify-center"
-            >
+>
               <img 
                 src={sunIcon} 
                 alt="Sun" 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain brightness-0 invert"
               />
             </motion.div>
           ) : (
