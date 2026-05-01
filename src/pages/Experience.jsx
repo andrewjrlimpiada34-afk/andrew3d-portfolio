@@ -26,8 +26,8 @@ const Experience = () => {
     ? "text-gray-300" 
     : "text-slate-700";
 
-  return (
-    <section className={`max-w-5xl mx-auto sm:p-16 pb-12 px-8 pt-[126px] min-h-[calc(100vh-80px)] ${sectionClass} theme-transition`}>
+return (
+    <section className={`w-full min-h-screen ${sectionClass} theme-transition pt-[126px] pb-12 px-4 sm:px-8`}>
       <Helmet>
         <title>Experience | Andrew B. Limpiada Jr.</title>
         <meta

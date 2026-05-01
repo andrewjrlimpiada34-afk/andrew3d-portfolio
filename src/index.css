@@ -60,6 +60,12 @@ body.dark-mode {
   background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a15 100%);
 }
 
+/* Full width dark mode for pages */
+.dark-full-bg {
+  background-color: #1a1a2e !important;
+  min-width: 100vw;
+}
+
 /* Theme Transition */
 .theme-transition {
   transition: background-color 0.5s ease, color 0.3s ease;

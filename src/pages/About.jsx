@@ -20,9 +20,9 @@ const About = () => {
     ? "text-gray-300" 
     : "text-slate-500";
 
-  return (
+return (
     <motion.section
-      className={`max-container ${sectionClass} theme-transition`}
+      className={`w-full min-h-screen ${sectionClass} theme-transition pt-[126px] pb-12 px-4 sm:px-8`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

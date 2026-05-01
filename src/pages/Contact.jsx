@@ -42,9 +42,9 @@ const Contact = () => {
     ? "text-gray-300" 
     : "text-slate-600";
 
-  return (
+return (
     <motion.section
-      className={`relative max-container ${sectionClass} theme-transition`}
+      className={`w-full min-h-screen ${sectionClass} theme-transition pt-[126px] pb-12 px-4 sm:px-8 relative`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
