@@ -125,8 +125,8 @@ const About = () => {
             </motion.p>
           </motion.div>
 
-          {/* Navigation Buttons - Under quote, above My Skills */}
-          <div className="flex flex-wrap gap-4 mt-6">
+{/* Navigation Buttons - Under quote, above My Skills */}
+          <div className="flex flex-wrap justify-center gap-4 mt-6">
             <motion.button
               className={`px-6 py-3 rounded-xl font-semibold transition-all ${
                 isDarkMode 
@@ -141,10 +141,10 @@ const About = () => {
               My Academic Journey
             </motion.button>
             <motion.button
-              className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+              className={`px-6 py-3 rounded-xl font-semibold transition-all border-2 ${
                 isDarkMode 
-                  ? "bg-purple-600 hover:bg-purple-700 text-white" 
-                  : "bg-purple-500 hover:bg-purple-600 text-white"
+                  ? "border-purple-500 text-purple-400 hover:bg-purple-900/30" 
+                  : "border-purple-500 text-purple-600 hover:bg-purple-100"
               }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
