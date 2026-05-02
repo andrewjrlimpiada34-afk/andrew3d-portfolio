@@ -6,10 +6,18 @@ const Loader = () => {
   const [messageIndex, setMessageIndex] = useState(0);
 
   const messages = [
-    "These may take a while",
+    "This may take a while",
     "You can still access my portfolio instead of waiting",
     "Get to know me!",
-    "Long press each icons to view more info."
+    "Long press each icons to view more info.",
+    "Grab a cup of coffee while waiting. ☕",
+    "NOTICE: You can only view if the resources are loading.",
+    "TIP: Use light mode in Projects for better visibility.",
+    "You can long press the Marinduque island and Morion glb to view interesting facts.",
+    "Please wait.......",
+    "Almost there.......",
+    "Just a few more seconds.......",
+    "Resources will be loaded soon......."
   ];
 
   useEffect(() => {
