@@ -5,7 +5,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { soundoff, soundon } from "../assets/icons";
 import sakura from "../assets/sakura.mp3";
 import { HomeInfo, Loader, SEO } from "../components";
-import { Butterfly, Marinduque, Morion, Sky, NightSky } from "../models";
+import { Butterfly, Firefly, Marinduque, Morion, Sky, NightSky } from "../models";
 import { useTheme } from "../context/ThemeContext";
 
 const Home = () => {
@@ -141,9 +141,12 @@ const Home = () => {
             intensity={isDarkMode ? 0.4 : 1}
           />
 
-          {/* Sky model - swap between day/night */}
+{/* Sky model - swap between day/night */}
           {isDarkMode ? (
-            <NightSky isAnimated={isAnimated} />
+            <>
+              <NightSky isAnimated={isAnimated} />
+              <Firefly isAnimated={isAnimated} />
+            </>
           ) : (
             <Sky isAnimated={isAnimated} />
           )}
