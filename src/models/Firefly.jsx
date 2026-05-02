@@ -46,7 +46,7 @@ export function Firefly({ isAnimated }) {
     <mesh
       ref={fireflyRef}
       position={[-6, 2.8, 2]}
-      scale={[0.08, 0.08, 0.08]}
+      scale={[0.04, 0.04, 0.04]}
     >
       <primitive object={scene} />
     </mesh>
