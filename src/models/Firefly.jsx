@@ -1,37 +1,55 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import { useAnimations, useGLTF } from "@react-three/drei";
 
 import fireflyScene from "../assets/3d/firefly.glb";
 
 export function Firefly({ isAnimated }) {
   const fireflyRef = useRef();
-  const { scene } = useGLTF(fireflyScene);
+  const { scene, animations } = useGLTF(fireflyScene);
+  const { actions } = useAnimations(animations, fireflyRef);
 
-  useFrame(({ clock }, delta) => {
+  useEffect(() => {
+    Object.values(actions).forEach((action) => {
+      if (!action) return;
+      if (isAnimated) {
+        action.play();
+      } else {
+        action.stop();
+      }
+    });
+  }, [actions, isAnimated]);
+
+  useFrame(({ clock, camera }, delta) => {
     if (!fireflyRef.current || !isAnimated) {
       return;
     }
 
-    // Firefly hovers and flies slowly in a circular pattern
-    const time = clock.elapsedTime;
-    fireflyRef.current.position.y = Math.sin(time * 1.5) * 0.3 + 2.5;
-    fireflyRef.current.position.x = Math.sin(time * 0.8) * 2 - 2;
-    fireflyRef.current.position.z = Math.cos(time * 0.8) * 1 + 1;
+    // Firefly hovers with subtle vertical movement
+    fireflyRef.current.position.y = Math.sin(clock.elapsedTime * 1.5) * 0.25 + 2.8;
+
+    // Fly across the scene from left to right
+    if (fireflyRef.current.position.x > camera.position.x + 10) {
+      fireflyRef.current.position.x = camera.position.x - 10;
+    }
+    fireflyRef.current.position.x += delta * 1.5;
     
-    // Slight rotation as it flies
-    fireflyRef.current.rotation.y = Math.sin(time * 0.5) * 0.3;
-    fireflyRef.current.rotation.z = Math.sin(time * 3) * 0.1;
+    // Subtle back and forth movement in z axis
+    fireflyRef.current.position.z = Math.sin(clock.elapsedTime * 0.8) * 0.5 + 2;
+    
+    // Rotation based on movement direction
+    fireflyRef.current.rotation.y = Math.sin(clock.elapsedTime * 0.5) * 0.2;
+    fireflyRef.current.rotation.z = Math.sin(clock.elapsedTime * 3) * 0.08;
   });
 
-return (
-    <primitive
-      object={scene.clone()}
+  return (
+    <mesh
       ref={fireflyRef}
-      position={[-2, 2.5, 2]}
-      scale={[0.15, 0.15, 0.15]}
-      rotation={[0, 0, 0]}
-    />
+      position={[-6, 2.8, 2]}
+      scale={[0.08, 0.08, 0.08]}
+    >
+      <primitive object={scene} />
+    </mesh>
   );
 }
 
