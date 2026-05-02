@@ -140,11 +140,11 @@ const About = () => {
             >
               My Academic Journey
             </motion.button>
-            <motion.button
+<motion.button
               className={`px-6 py-3 rounded-xl font-semibold transition-all border-2 ${
                 isDarkMode 
-                  ? "border-purple-500 text-purple-400 hover:bg-purple-900/30" 
-                  : "border-purple-500 text-purple-600 hover:bg-purple-100"
+                  ? "border-blue-500 text-blue-400 hover:bg-blue-900/30" 
+                  : "border-blue-500 text-blue-600 hover:bg-blue-100"
               }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -255,8 +255,8 @@ const About = () => {
                     {/* Content */}
                     <div className={`flex-1 p-4 rounded-xl ${cardClass}`}>
                       <span className={`text-lg font-bold ${
-                        item.isFuture 
-                          ? 'text-green-500' 
+item.isFuture 
+                          ? 'text-blue-500' 
                           : isDarkMode ? 'text-blue-400' : 'text-blue-600'
                       }`}>
                         {item.year}
@@ -276,14 +276,14 @@ const About = () => {
       {/* My Blog Section */}
       <AnimatePresence>
         {activeSection === "blog" && (
-          <motion.div
-            className="mt-4 max-w-2xl"
+<motion.div
+            className="mt-4 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className={`text-2xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
+            <h2 className={`text-2xl font-bold mb-6 text-center ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
               Andrew's Space
             </h2>
             
@@ -316,11 +316,11 @@ const About = () => {
               </p>
               
 {/* Gallery Button */}
-              <motion.button
-                className={`mt-8 px-6 py-3 rounded-xl font-semibold transition-all ${
+<motion.button
+                className={`mt-8 px-6 py-3 rounded-xl font-semibold transition-all border-2 ${
                   isDarkMode 
-                    ? "bg-green-600 hover:bg-green-700 text-white" 
-                    : "bg-green-500 hover:bg-green-600 text-white"
+                    ? "border-blue-500 text-blue-400 hover:bg-blue-900/30" 
+                    : "border-blue-500 text-blue-600 hover:bg-blue-100"
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
